@@ -5,7 +5,7 @@ if($_POST)
 	{
  $u=$_POST['Email']; //get username key in from the login form
     $p=$_POST['Password']; //get the password value from login form
-    $p = password_verify($password,$p);
+    $p = password_verify($password,$p); // can you try not use this function first
     $sql="select * from user where Email='$u' and Password='$p'"; //verify the
     $result = $conn->query($sql);
     
