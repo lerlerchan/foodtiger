@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2020 at 01:52 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: Jun 16, 2020 at 09:18 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,13 +28,30 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `account` (
-  `Name` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `Email` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `PhoneNo` int(15) NOT NULL,
-  `Address` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `Password` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `Password2` varchar(20) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Name` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `PhoneNo` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `account`
+--
+
+INSERT INTO `account` (`Name`, `Email`, `PhoneNo`, `Address`, `Password`) VALUES
+('wefw', '11@ds.com', '121312312', 'wddqw2', '1'),
+('ycc', 'yeong4470@gmail.com', '0147464470', '27,jalan inadh', '$2y$10$bIw3AWv0zXacU1JEWELMq.9.nVOZHQtQm3TGzgZ8Yxfxsm6LSp4d2');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`Email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
