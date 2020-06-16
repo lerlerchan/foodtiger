@@ -3,27 +3,38 @@ include 'connection.php';
 session_start();
 if($_POST)
 	{
-		$Email = $_POST['Email'];
-		$Password = $_POST['Password'];
-        
-		$sql = "SELECT * FROM `account` where Email = '".$Email."' and Password = '".$Password."' ";
-        $query =  mysqli_query($conn, $sql);
-
-		if(mysqli_num_rows($query)>0)
-		{
-			$row = mysqli_fetch_assoc($query);
-			session_start();
-            $_SESSION['Email'] = $row['Email'];
-            if(password_verify($Password,$pw)){
-            header('Location: test.php');
+ $u=$_POST['Email']; //get username key in from the login form
+    $p=$_POST['Password']; //get the password value from login form
+    $p = password_verify($password,$p);
+    $sql="select * from user where Email='$u' and Password='$p'"; //verify the
+    $result = $conn->query($sql);
+    
+    // safe method
+    if($stmt = $conn->prepare("SELECT Email,Password from account where Email=? and Password=?")){
+    
+        $stmt->bind_param("ss",$u,$p);
+        $stmt->execute();
+        $stmt->bind_result($Email,$Password);
+        if($stmt->fetch()){
+            $_SESSION['Email'] =$u; //assign the username to session value
+            $message1= $_SESSION['Email']." Login Successful!";
+            echo "<script>alert('$message1');</script>";
+            echo "<script>window.location.assign('test.php');</script>";
         }
-		}
-		else
-		{
-			echo "<script> alert('Invalid Email or Password.'); </script>";
-		}
+        else{
+            $message = "Login Fail.Please Try again!";
+            echo "<script>alert('$message');</script>";
+            echo "<script>window.location.assign('login.php');</script>";
+    
+    
+    
+        }
+        $stmt->close();
+    }
     }
     
+   
+
 ?>
 <!DOCTYPE html>
 <html>
